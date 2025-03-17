@@ -152,26 +152,21 @@ jobs:
           git add -A
           git commit -m "Force remove -dirty suffix from kernel version"
 
-- name: 开启lxc和docker配置
-      run: |
-        cd kernel_workspace/kernel_platform
-        wget https://github.com/wu17481748/lxc-docker/releases/download/lxc-docker-2config/LXC-DOCKER-OPEN-CONFIG.sh
-        chmod 777 LXC-DOCKER-OPEN-CONFIG.sh
-        ./LXC-DOCKER-OPEN-CONFIG.sh./common/arch/arm64/configs/gki_defconfig -w
-       echo "CONFIG_ANDROID_PARANOID_NETWORK=y" >> ./common/arch/arm64/configs/gki_defconfig
-       echo "CONFIG_FTRACE_SYSCALLS=y" >> ./common/arch/arm64/configs/gki_defconfig
-
- - name: 打入lxc补丁
-      if: env.LXC_PATCH == 'true'
-      run: |
-       cd kernel_workspace/kernel_platformm
-       git clone https://github.com/tomxi1997/lxc-docker-support-for-android.git utils
-     chmod +kernel_workspace/kernel_platformm/utils/runcpatch.sh
-        sh kernel_workspace/kernel_platformm/utils/runcpatch.sh kernel_workspace/kernel_platformm/kernel/cgroup/cgroup.c
+      - name: 开启lxc和docker配置
+        run: |
+         cd kernel_workspace/kernel_platform
+         wget https://github.com/wu17481748/lxc-docker/releases/download/lxc-docker-2config/LXC-DOCKER-OPEN-CONFIG.sh
+         chmod 777 LXC-DOCKER-OPEN-CONFIG.sh
+         ./LXC-DOCKER-OPEN-CONFIG.sh./common/arch/arm64/configs/gki_defconfig -w
+          echo "CONFIG_ANDROID_PARANOID_NETWORK=y" >> ./common/arch/arm64/configs/gki_defconfig
+          echo "CONFIG_FTRACE_SYSCALLS=y" >> ./common/arch/arm64/configs/gki_defconfig
+          git clone https://github.com/tomxi1997/lxc-docker-support-for-android.git utils
+          chmod +kernel_workspace/kernel_platformm/utils/runcpatch.sh
+           sh kernel_workspace/kernel_platformm/utils/runcpatch.sh kernel_workspace/kernel_platformm/kernel/cgroup/cgroup.c
            if [ -f kernel_workspace/kernel_platformm/net/netfilter/xt_qtaguid.c ]; then
-        patch -p0 < kernel_workspace/kernel_platformm/utils/xt_qtaguid.patch
-        fi 
-         
+            patch -p0 < kernel_workspace/kernel_platformm/utils/xt_qtaguid.patch
+          fi 
+          
       - name: Build kernel
         run: |
          cd kernel_workspace
