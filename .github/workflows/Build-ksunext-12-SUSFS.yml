@@ -152,6 +152,15 @@ jobs:
           git add -A
           git commit -m "Force remove -dirty suffix from kernel version"
 
+- name: 开启lxc和docker配置
+      run: |
+        cd kernel_workspace/kernel_platform
+        wget https://github.com/wu17481748/lxc-docker/releases/download/lxc-docker-2config/LXC-DOCKER-OPEN-CONFIG.sh
+        chmod 777 LXC-DOCKER-OPEN-CONFIG.sh
+        ./LXC-DOCKER-OPEN-CONFIG.sh./common/arch/arm64/configs/gki_defconfig -w
+       echo "CONFIG_ANDROID_PARANOID_NETWORK=y" >> ./common/arch/arm64/configs/gki_defconfig
+       echo "CONFIG_FTRACE_SYSCALLS=y" >> ./common/arch/arm64/configs/gki_defconfig
+
       - name: Build kernel
         run: |
          cd kernel_workspace
