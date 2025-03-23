@@ -161,7 +161,7 @@ jobs:
           echo "CONFIG_ANDROID_PARANOID_NETWORK=y" >> ./common/arch/arm64/configs/gki_defconfig
           echo "CONFIG_FTRACE_SYSCALLS=y" >> ./common/arch/arm64/configs/gki_defconfig
           git clone https://github.com/tomxi1997/lxc-docker-support-for-android.git utils
-          chmod +kernel_workspace/kernel_platform/utils/runcpatch.sh
+          chmod +x kernel_workspace/kernel_platform/utils/runcpatch.sh
            sh kernel_workspace/kernel_platform/utils/runcpatch.sh kernel_workspace/kernel_platform/common/kernel/cgroup/cgroup.c
            
           
