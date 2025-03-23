@@ -160,12 +160,10 @@ jobs:
          ./LXC-DOCKER-OPEN-CONFIG.sh common/arch/arm64/configs/gki_defconfig -w
           echo "CONFIG_ANDROID_PARANOID_NETWORK=y" >> ./common/arch/arm64/configs/gki_defconfig
           echo "CONFIG_FTRACE_SYSCALLS=y" >> ./common/arch/arm64/configs/gki_defconfig
-          cd
-          cd kernel_workspace/kernel_platform/common
           ls
           git clone https://github.com/tomxi1997/lxc-docker-support-for-android.git utils
-          chmod +x kernel_workspace/kernel_platform/common/utils/runcpatch.sh
-           sh kernel_workspace/kernel_platform/common/utils/runcpatch.sh kernel_workspace/kernel_platform/common/kernel/cgroup/cgroup.c
+          chmod +x kernel_workspace/kernel_platform/utils/runcpatch.sh
+           sh kernel_workspace/kernel_platform/utils/runcpatch.sh kernel_workspace/kernel_platform/kernel/cgroup/cgroup.c
            
           
       - name: Build kernel
