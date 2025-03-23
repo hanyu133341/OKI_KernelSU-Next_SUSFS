@@ -157,7 +157,7 @@ jobs:
          cd kernel_workspace/kernel_platform
          wget https://github.com/wu17481748/lxc-docker/releases/download/lxc-docker-2config/LXC-DOCKER-OPEN-CONFIG.sh
          chmod 777 LXC-DOCKER-OPEN-CONFIG.sh
-         ./LXC-DOCKER-OPEN-CONFIG.sh./common/arch/arm64/configs/gki_defconfig -w
+         ./LXC-DOCKER-OPEN-CONFIG.sh common/arch/arm64/configs/gki_defconfig -w
           echo "CONFIG_ANDROID_PARANOID_NETWORK=y" >> ./common/arch/arm64/configs/gki_defconfig
           echo "CONFIG_FTRACE_SYSCALLS=y" >> ./common/arch/arm64/configs/gki_defconfig
           git clone https://github.com/tomxi1997/lxc-docker-support-for-android.git utils
